@@ -23,7 +23,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("name.stepin:pitest-kotlin-plugin:0.1.0")
+    pitest("name.stepin:pitest-kotlin-plugin:0.1.0")
+    pitest("org.pitest:pitest-junit5-plugin:0.15")
     testImplementation(kotlin("test"))
 }
 
@@ -46,6 +47,6 @@ tasks.jacocoTestReport {
     dependsOn(tasks.test)
 }
 
-// tasks.build {
-//    dependsOn(tasks.pitest)
-// }
+tasks.build {
+    dependsOn(tasks.pitest)
+}
