@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.7.0"
     application
+    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    jacoco
     id("info.solidsoft.pitest")
 }
 
@@ -37,6 +39,13 @@ application {
     mainClass.set("MainKt")
 }
 
-tasks.build {
-    dependsOn(tasks.pitest)
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
 }
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+}
+
+// tasks.build {
+//    dependsOn(tasks.pitest)
+// }
